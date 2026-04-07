@@ -20,7 +20,7 @@ def get_secret(key):
 # ── Config ────────────────────────────────────────────────────────────────────
 NEO4J_URL      = get_secret("NEO4J_URL")
 NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
-NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD", "")
+NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD")
 NEO4J_DATABASE=get_secret("NEO4J_DATABASE")
 GROQ_API_KEY   = get_secret("GROQ_API_KEY")
 MODEL          = "llama-3.3-70b-versatile"
