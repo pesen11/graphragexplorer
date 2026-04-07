@@ -7,14 +7,22 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
 import streamlit as st
 
-load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
+# load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
+
+def get_secret(key):
+    try:
+        # Streamlit Cloud
+        return st.secrets[key]
+    except NameError:
+        # Local
+        return os.getenv(key)
 
 # ── Config ────────────────────────────────────────────────────────────────────
-NEO4J_URL      = os.getenv("NEO4J_URL")
-NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
-NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "")
-NEO4J_DATABASE=os.getenv("NEO4J_DATABASE")
-GROQ_API_KEY   = os.getenv("GROQ_API_KEY")
+NEO4J_URL      = get_secret("NEO4J_URL")
+NEO4J_USERNAME = get_secret("NEO4J_USERNAME")
+NEO4J_PASSWORD = get_secret("NEO4J_PASSWORD", "")
+NEO4J_DATABASE=get_secret("NEO4J_DATABASE")
+GROQ_API_KEY   = get_secret("GROQ_API_KEY")
 MODEL          = "llama-3.3-70b-versatile"
 TOP_K          = 3
 HOP_DEPTH      = 2
